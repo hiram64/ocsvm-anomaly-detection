@@ -9,7 +9,7 @@ from sklearn.metrics import precision_recall_curve, auc, roc_auc_score
 def parse_args():
     parser = argparse.ArgumentParser(description='Anomaly Detection by One Class SVM')
     parser.add_argument('--data_path', default='./data/cifar10_cae.npz', type=str, help='path to dataset')
-    parser.add_argument('--anomaly_label', default=8, type=int, help='label defined as anomality')
+    parser.add_argument('--normal_label', default=8, type=int, help='label defined as anomality')
     parser.add_argument('--rate_normal_train', default=0.82, type=float, help='rate of normal data to use in training')
     parser.add_argument('--rate_anomaly_test', default=0.1, type=float,
                         help='rate of abnormal data versus normal data. default is 10:1')
@@ -31,17 +31,17 @@ def load_data(data_to_path):
     return full_images, full_labels
 
 
-def prepare_data(full_images, full_labels, anomaly_label, rate_normal_train):
+def prepare_data(full_images, full_labels, normal_label, rate_normal_train):
     """prepare data
     split data into anomaly data and normal data
     """
     RNG = np.random.RandomState(42)
 
     # data whose label corresponds to anomaly label, otherwise treated as normal data
-    ano_x = full_images[full_labels != anomaly_label]
-    ano_y = full_labels[full_labels != anomaly_label]
-    normal_x = full_images[full_labels == anomaly_label]
-    normal_y = full_labels[full_labels == anomaly_label]
+    ano_x = full_images[full_labels != normal_label]
+    ano_y = full_labels[full_labels != normal_label]
+    normal_x = full_images[full_labels == normal_label]
+    normal_y = full_labels[full_labels == normal_label]
 
     # replace label : anomaly -> 1 : normal -> 0
     ano_y[:] = 1
@@ -97,14 +97,14 @@ def main():
     # set parameters
     args = parse_args()
     data_path = args.data_path
-    anomaly_label = args.anomaly_label
+    normal_label = args.normal_label
     rate_normal_train = args.rate_normal_train
     rate_anomaly_test = args.rate_anomaly_test
     test_rep_count = args.test_rep_count
 
     # Load and Prepare data
     full_images, full_labels = load_data(data_path)
-    split_data = prepare_data(full_images, full_labels, anomaly_label, rate_normal_train)
+    split_data = prepare_data(full_images, full_labels, normal_label, rate_normal_train)
 
     # set different random seeds
     RNG_VAL_SEED = [42, 89, 2, 156, 491, 32, 67, 341, 100, 279]
