@@ -19,9 +19,9 @@ The encoded features by CAE will be saved in the data directory.
 
 ### 3. Run Anomaly Detection
 First, normal class need to be defined in "normal_label". It means the other classes except the normal class will be automatically defined as abnormal.
-By running the script below, OC-SVM is trained with the normal data. As evaluation metrics, PR()
+By running the script below, OC-SVM is trained with the normal data. As evaluation metrics, AUCs of ROC(Receiver Operating Characteristic) and PR(Precision and Recall) are calculated.
 
-By default, training model and test procedure is repeated over different nu parameters(see scikit-learn document). For each nu and its trained model, AUCs of ROC and PR are averaged over 10 different test data set as evaluation metrics.
+By default, training model and test procedure is repeated over different nu parameters(see scikit-learn document, gamma and kernel are fixed in the script). For each nu and its trained model, the AUCs are averaged over 10 different test data set.
 
 ```
 python anomaly_detection_ocsvm.py
