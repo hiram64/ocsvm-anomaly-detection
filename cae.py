@@ -25,7 +25,7 @@ def load_data(data_to_path):
     """
     data = np.load(data_to_path)
     all_image = data['images']
-    all_label = data['lables']
+    all_label = data['labels']
     all_image = (all_image - 127.0) / 127.0
 
     return all_image, all_label

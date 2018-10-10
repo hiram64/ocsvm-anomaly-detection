@@ -150,6 +150,7 @@ def main():
         print('PR AUC : ', total_pr)
         print('ROC_AUC : ', total_roc)
 
+    print('***' * 5)
     print('PR_AUC MAX : ', max(pr_scores))
     print('ROC_AUC MAX : ', max(roc_scores))
     print('ROC_MAX_NU : ', nus[int(np.argmax(roc_scores))])
