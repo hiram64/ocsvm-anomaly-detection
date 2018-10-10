@@ -11,7 +11,7 @@ scikit-learn, keras, numpy
 Prepare data and labels to use. For instance, CIFAR10 is composed of 10 classes and each label should express unique class and be integer. These prepared data should be placed in the data directory.
 
 You can download CIFAR10 data via :  
-https://www.kaggle.com/janzenliu/cifar-10-batches-py#batches.meta
+https://www.kaggle.com/janzenliu/cifar-10-batches-py
 
 Put them in "data" directory and run the following code to compress them into NPZ file.
 ```
