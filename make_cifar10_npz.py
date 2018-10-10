@@ -6,7 +6,7 @@ import numpy as np
 
 # The directory you downloaded CIFAR-10
 # You can download cifar10 data via https://www.kaggle.com/janzenliu/cifar-10-batches-py
-data_dir = './cifar-10-batches-py'
+data_dir = './data'
 
 all_files = glob.glob(data_dir + '/data_batch' + '*')
 test_files = glob.glob(data_dir + '/test_batch' + '*')

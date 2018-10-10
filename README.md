@@ -10,12 +10,22 @@ scikit-learn, keras, numpy
 ### 1. Prepare data
 Prepare data and labels to use. For instance, CIFAR10 is composed of 10 classes and each label should express unique class and be integer. These prepared data should be placed in the data directory.
 
+You can download CIFAR10 data via :  
+https://www.kaggle.com/janzenliu/cifar-10-batches-py#batches.meta
+
+Put them in "data" directory and run the following code to compress them into NPZ file.
+```
+python make_cifar10_npz.py
+```
+After running this code, you can get cifar10.npz under "data" directory.
+
+
 ### 2. Train CAE
 Run the following command. Settable parameters like epoch, batchsize or output directory are described in the script.
 ```
 python cae.py
 ```
-The encoded features by CAE will be saved in the data directory.
+The encoded features by CAE will be saved in the "data" directory as cifar10_cae.npz.
 
 ### 3. Run Anomaly Detection
 First, normal class needs to be defined by "normal_label". It means the other classes except the normal class will be automatically defined as abnormal.
