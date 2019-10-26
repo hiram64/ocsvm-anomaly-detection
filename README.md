@@ -4,7 +4,7 @@ This repository includes codes for unsupervised anomaly detection by means of On
 Firstly, the image data are compressed by convolutional autoencoder(CAE) to vector features. Secondly, training a model only with the features of the data which you define as normal will be done. At the last, you can run anomaly detection with One-Class SVM and you can evaluate the models by AUCs of ROC and PR.
 
 #### Dependencies
-scikit-learn, keras, numpy
+scikit-learn, keras, numpy, openCV
 
 ## How to use
 ### 1. Prepare data
@@ -20,6 +20,20 @@ python make_cifar10_npz.py
 After running this code, you can get cifar10.npz under "data" directory.
 
 
+#### (Optional)
+When you use your own dataset, please prepare npz file as the same format as CIFAR-10.
+```
+data = np.load('your_data.npz')
+data.files
+-> ['images', 'labels'] # "images" and "labels" keys'
+
+data['labels']
+-> array([6, 9, 9, ..., 5, 1, 7]) # labels is the vector composed of integers which correspond to each class identifier.
+
+Note : Please be careful fo input image size of model.py. You might need to change network architecture's parameter so that it can deal with your images.
+```
+
+
 ### 2. Train CAE
 Run the following command. Settable parameters like epoch, batchsize or output directory are described in the script.
 ```
@@ -28,7 +42,7 @@ python cae.py
 The encoded features by CAE will be saved in the "data" directory as cifar10_cae.npz.
 
 ### 3. Run Anomaly Detection
-First, normal class needs to be defined by "normal_label". It means the other classes except the normal class will be automatically defined as abnormal.
+First, normal class needs to be defined by "normal_label". It means the other classes EXCEPT the normal class will be automatically defined as abnormal. 
 By running the script below, OC-SVM is trained with the normal data. As evaluation metrics, AUCs of ROC(Receiver Operating Characteristic) and PR(Precision and Recall) are calculated.
 
 By default, training models and test procedure are repeated over different nu parameters(see scikit-learn document. gamma and kernel are fixed in the script). For each nu and its trained model, the AUCs are averaged over 10 different test data set.

@@ -42,8 +42,6 @@ def load_data(data_to_path):
         print('Loading data should be numpy array and has "ae_out" and "labels" keys.')
         sys.exit(1)
 
-    print(full_images.shape)
-
     return full_images, full_labels
 
 
